@@ -1,0 +1,54 @@
+<div class="container spacer">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading"> Liste des contacts: </div>
+    <br>
+    <br>
+    <div class="panel-body">
+      <div class="form-group">
+        <!--data binding pour la corelation entre mes champs ce 
+          pendant ngModule est une classe de from donc je l'importe dans les component-->
+
+        <input class="form-control" type="text" [(ngModel)]="motCle" />
+        <input class="form-control" type="hidden" [(ngModel)]="is_key_search" />
+
+        <button class="btn btn-outline-success my-2 my-sm-0" (click)="chercher()">Chercher</button>
+
+      </div>
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>prenom</th>
+          <th>email</th>
+        </tr>
+      </thead>
+      <tbody *ngIf !="is_key_search">
+          <tr *ngFor="let item of contactList[0]">
+            <td>{{ item.nom }}</td>
+            <td>{{ item.prenom }}</td>
+            <td>{{ item.email }}</td>
+          </tr>
+      </tbody>
+
+      <tbody>
+        <tr *ngFor="let item of contactList[0]">
+          <td>{{ item.nom }}</td>
+          <td>{{ item.prenom }}</td>
+          <td>{{ item.email }}</td>
+          <button type="button" class="btn" (click)="onEditContact(item.id);">Edit</button>
+
+        </tr>
+    </tbody>
+      
+    </table>
+    <div class="container">
+      <ul class="nav nav-pills">
+        <li [ngClass]="{'active':i==pageCourante}" *ngFor="let pages of contactList;let i=index">
+          <a (click)="goToPage(i)">{{i}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
